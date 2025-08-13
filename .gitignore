@@ -1,0 +1,23 @@
+# Node/JS
+node_modules/
+npm-debug.log*
+yarn.lock
+dist/
+coverage/
+
+# Go
+bin/
+*.test
+*.exe
+*.out
+
+# Editors/OS
+.DS_Store
+.vscode/
+.idea/
+
+# Images & screenshots
+*.png
+*.jpg
+*.jpeg
+*.gif
