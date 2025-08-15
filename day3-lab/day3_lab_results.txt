@@ -1,0 +1,98 @@
+cufflinks@Rosathel:~/day3-lab$ ls -lR
+.:
+total 12
+drwxr-xr-x 2 cufflinks cufflinks 4096 Aug 15 15:36 alpha
+drwxr-xr-x 2 cufflinks cufflinks 4096 Aug 15 15:36 beta
+drwxr-xr-x 2 cufflinks cufflinks 4096 Aug 15 15:36 gamma
+
+./alpha:
+total 0
+-rw-r--r-- 1 cufflinks cufflinks 0 Aug 15 15:36 a.txt
+
+./beta:
+total 0
+-rw-r--r-- 1 cufflinks cufflinks 0 Aug 15 15:36 b.txt
+
+./gamma:
+total 0
+-rw-r--r-- 1 cufflinks cufflinks 0 Aug 15 15:36 c.txt
+
+
+cufflinks@Rosathel:~$ cd dev-setup/
+cufflinks@Rosathel:~/dev-setup$ mkdir ~/day3-lab
+cufflinks@Rosathel:~/dev-setup$ cd ~/day3-lab/
+cufflinks@Rosathel:~/day3-lab$ mkdir alpha beta gamma
+cufflinks@Rosathel:~/day3-lab$ touch alpha/a.txt beta/b.txt gamma/c.txt
+
+cufflinks@Rosathel:~/day3-lab$ chmod 764 alpha/a.txt
+cufflinks@Rosathel:~/day3-lab$ chmod a-x beta/b.txt
+cufflinks@Rosathel:~/day3-lab$ chmod a+x gamma/c.txt
+
+-rwxr-xr-x 1 cufflinks cufflinks 0 Aug 15 15:36 c.txt
+cufflinks@Rosathel:~/day3-lab$ sleep 300 &
+[1] 719
+cufflinks@Rosathel:~/day3-lab$ jobs
+[1]+  Running                 sleep 300 &
+cufflinks@Rosathel:~/day3-lab$ fg %1
+sleep 300
+^C
+cufflinks@Rosathel:~/day3-lab$ grep -r "Hello" ~/day3-lab/
+cufflinks@Rosathel:~/day3-lab$ find ~ -name "*.txt"
+/home/cufflinks/day3-lab/alpha/a.txt
+/home/cufflinks/day3-lab/beta/b.txt
+/home/cufflinks/day3-lab/gamma/c.txt
+/home/cufflinks/dev-setup/conflict.txt
+/home/cufflinks/dev-setup/day2.txt
+/home/cufflinks/.cache/go-build/trim.txt
+cufflinks@Rosathel:~/day3-lab$ df -h
+Filesystem      Size  Used Avail Use% Mounted on
+none            1.9G     0  1.9G   0% /usr/lib/modules/6.6.87.2-microsoft-standard-WSL2
+none            1.9G  4.0K  1.9G   1% /mnt/wsl
+drivers         475G  126G  350G  27% /usr/lib/wsl/drivers
+/dev/sdd       1007G  2.2G  954G   1% /
+none            1.9G   76K  1.9G   1% /mnt/wslg
+none            1.9G     0  1.9G   0% /usr/lib/wsl/lib
+rootfs          1.9G  2.7M  1.9G   1% /init
+none            1.9G  520K  1.9G   1% /run
+none            1.9G     0  1.9G   0% /run/lock
+none            1.9G     0  1.9G   0% /run/shm
+none            1.9G   76K  1.9G   1% /mnt/wslg/versions.txt
+none            1.9G   76K  1.9G   1% /mnt/wslg/doc
+C:\             475G  126G  350G  27% /mnt/c
+tmpfs           1.9G   16K  1.9G   1% /run/user/1000
+cufflinks@Rosathel:~/day3-lab$ free -h
+               total        used        free      shared  buff/cache   available
+Mem:           3.7Gi       437Mi       2.7Gi       3.4Mi       603Mi       3.2Gi
+Swap:          1.0Gi          0B       1.0Gi
+cufflinks@Rosathel:~/day3-lab$ top
+top - 15:43:43 up 9 min,  1 user,  load average: 0.00, 0.00, 0.00
+Tasks:  25 total,   1 running,  24 sleeping,   0 stopped,   0 zombie
+%Cpu(s):  0.0 us,  0.0 sy,  0.0 ni,100.0 id,  0.0 wa,  0.0 hi,  0.0 si,  0.0 st
+MiB Mem :   3759.2 total,   2791.2 free,    438.8 used,    604.0 buff/cache
+MiB Swap:   1024.0 total,   1024.0 free,      0.0 used.   3320.4 avail Mem
+
+    PID USER      PR  NI    VIRT    RES    SHR S  %CPU  %MEM     TIME+ COMMAND
+    837 cufflin+  20   0    9272   5376   3328 R   0.3   0.1   0:00.03 top
+      1 root      20   0   21716  11980   9036 S   0.0   0.3   0:00.55 systemd
+      2 root      20   0    3060   1664   1664 S   0.0   0.0   0:00.00 init-systemd(Ub
+      6 root      20   0    3060   1792   1792 S   0.0   0.0   0:00.00 init
+     39 root      19  -1   58656  18332  17564 S   0.0   0.5   0:00.26 systemd-journal
+     89 root      20   0   25136   6400   4992 S   0.0   0.2   0:00.10 systemd-udevd
+    143 systemd+  20   0   21456  12544  10496 S   0.0   0.3   0:00.10 systemd-resolve
+    147 systemd+  20   0   91024   7552   6784 S   0.0   0.2   0:00.07 systemd-timesyn
+    157 root      20   0    4236   2432   2304 S   0.0   0.1   0:00.00 cron
+    158 message+  20   0    9540   4736   4352 S   0.0   0.1   0:00.06 dbus-daemon
+    171 root      20   0   17968   8320   7424 S   0.0   0.2   0:00.10 systemd-logind
+    175 root      20   0 1756096  11904  10240 S   0.0   0.3   0:00.13 wsl-pro-service
+    197 syslog    20   0  222508   5376   4352 S   0.0   0.1   0:00.08 rsyslogd
+    203 root      20   0    3160   1920   1792 S   0.0   0.0   0:00.00 agetty
+    206 root      20   0 2319644  47200  33152 S   0.0   1.2   0:01.25 containerd
+    210 root      20   0    3116   1792   1664 S   0.0   0.0   0:00.00 agetty
+    221 root      20   0  107032  22008  12928 S   0.0   0.6   0:00.23 unattended-upgr
+    285 root      20   0 2433732  76880  56192 S   0.0   2.0   0:00.41 dockerd
+    538 root      20   0    3064    896    896 S   0.0   0.0   0:00.00 SessionLeader
+    539 root      20   0    3080   1024   1024 S   0.0   0.0   0:00.05 Relay(540)
+    540 cufflin+  20   0    6200   5120   3456 S   0.0   0.1   0:00.08 bash
+    541 root      20   0    6660   4096   3584 S   0.0   0.1   0:00.00 login
+    630 cufflin+  20   0   20304  11008   9088 S   0.0   0.3   0:00.08 systemd
+cufflinks@Rosathel:~/day3-lab$ touch day3_lab_results.txt
